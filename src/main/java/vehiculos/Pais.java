@@ -1,34 +1,24 @@
 package vehiculos;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Pais {
     private String nombre;
-    private static ArrayList<String> paisVenta = new ArrayList<String>();
+    private static Map<Pais, Integer> paisVenta=new HashMap<>();
     public Pais(String nombre){
         this.nombre=nombre;
-        paisVenta.add(nombre);
-        paisVenta.add("0");
+        paisVenta.put(this,0);
     }
-    public static String paisMasVendedor() {
-        String mayor = paisVenta.get(0);
-        int maximo=Integer.parseInt(paisVenta.get(1));
-        for (int i = 1; i<=paisVenta.size();i=i+2){
-            int p1=Integer.parseInt(paisVenta.get(i));
-            if (p1 > maximo) {
-                maximo=p1;
-                mayor=paisVenta.get(i-1);
+    public static Pais paisMasVendedor() {
+        int maximo=0;
+        Pais mayor=null;
+        for (Map.Entry<Pais,Integer> objeto: paisVenta.entrySet()) {
+            if(objeto.getValue()>maximo){
+                mayor=objeto.getKey();
+                maximo=objeto.getValue();
             }
         }
         return mayor;
-    }
-
-    public static ArrayList<String> getPaisVenta() {
-        return paisVenta;
-    }
-
-    public static void setPaisVenta(ArrayList<String> paisVenta) {
-        Pais.paisVenta = paisVenta;
     }
 
     public String getNombre() {
@@ -36,5 +26,11 @@ public class Pais {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public static Map<Pais, Integer> getPaisVenta() {
+        return paisVenta;
+    }
+    public static void setPaisVenta(Map<Pais, Integer> paisVenta) {
+        Pais.paisVenta = paisVenta;
     }
 }

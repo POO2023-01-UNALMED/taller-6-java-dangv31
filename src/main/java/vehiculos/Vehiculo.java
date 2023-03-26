@@ -1,6 +1,5 @@
 package vehiculos;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Vehiculo {
     private String placa;
@@ -22,24 +21,8 @@ public class Vehiculo {
         this.peso = peso;
         this.traccion = traccion;
         this.fabricante = fabricante;
-        for (int i = 0; i<= Pais.getPaisVenta().size(); i=i+2){
-            if(fabricante.getPais().getNombre() == Pais.getPaisVenta().get(i)){
-                int p1=Integer.parseInt(Pais.getPaisVenta().get(i+1));
-                p1++;
-                String p2=String.valueOf(p1);
-                Pais.getPaisVenta().set(i+1, p2);
-                break;
-            }
-        }
-        for (int i = 0; i<= Fabricante.getFabricanteVenta().size(); i=i+2){
-            if(fabricante.getNombre() == Fabricante.getFabricanteVenta().get(i)){
-                int p1=Integer.parseInt(Fabricante.getFabricanteVenta().get(i+1));
-                p1++;
-                String p2=String.valueOf(p1);
-                Fabricante.getFabricanteVenta().set(i+1, p2);
-                break;
-            }
-        }
+        Pais.getPaisVenta().put(fabricante.getPais(),Pais.getPaisVenta().get(fabricante.getPais())+1);
+        Fabricante.getFabricanteVenta().put(fabricante,Fabricante.getFabricanteVenta().get(fabricante)+1);
         CantidadVehiculos++;
     }
 

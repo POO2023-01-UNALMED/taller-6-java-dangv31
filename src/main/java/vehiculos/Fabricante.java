@@ -1,29 +1,28 @@
 package vehiculos;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Fabricante {
     private String nombre;
     private Pais pais;
-    private static ArrayList<String> fabricanteVenta = new ArrayList<String>();
+    private static Map<Fabricante, Integer> fabricanteVenta=new HashMap<>();
     public Fabricante(String nombre, Pais pais){
         this.nombre=nombre;
         this.pais=pais;
-        fabricanteVenta.add(nombre);
-        fabricanteVenta.add("0");
+        fabricanteVenta.put(this,0);
     }
-    public static String fabricaMayorVentas(){
-        String mayor = fabricanteVenta.get(0);
-        int maximo=Integer.parseInt(fabricanteVenta.get(1));
-        for (int i = 1; i<=fabricanteVenta.size();i=i+2){
-            int p1=Integer.parseInt(fabricanteVenta.get(i));
-            if (p1 > maximo) {
-                maximo=p1;
-                mayor=fabricanteVenta.get(i-1);
+    public static Fabricante fabricaMayorVentas(){
+        int maximo=0;
+        Fabricante mayor=null;
+        for (Map.Entry<Fabricante,Integer> objeto: fabricanteVenta.entrySet()) {
+            if(objeto.getValue()>maximo){
+                mayor=objeto.getKey();
+                maximo=objeto.getValue();
             }
         }
         return mayor;
+
     }
     public String getNombre() {
         return nombre;
@@ -41,11 +40,11 @@ public class Fabricante {
         this.pais = pais;
     }
 
-    public static ArrayList<String> getFabricanteVenta() {
+    public static Map<Fabricante, Integer> getFabricanteVenta() {
         return fabricanteVenta;
     }
 
-    public static void setFabricanteVenta(ArrayList<String> fabricanteVenta) {
+    public static void setFabricanteVenta(Map<Fabricante, Integer> fabricanteVenta) {
         Fabricante.fabricanteVenta = fabricanteVenta;
     }
 }
