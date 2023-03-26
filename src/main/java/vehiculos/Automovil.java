@@ -1,6 +1,4 @@
 package vehiculos;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Automovil extends Vehiculo {
     private int puestos;
